@@ -1,3 +1,7 @@
+//nextflow run ./nextflow_ci/pipelines/main.nf \
+//      -c ./nextflow_ci/nextflow.config -c inputs.nf -profile lsf \
+//      --nf_ci_loc $PWD -resume
+
 nextflow.enable.dsl=2
 
 // All inputs are read from Nextflow config file "inputs.nf",
@@ -6,12 +10,12 @@ nextflow.enable.dsl=2
 // you have to edit+commit+push that "inputs.nf" file, then rerun the pipeline.
 
 // import modules that depend on input mode:
-include { imeta_study } from '../modules/imeta_study.nf'
-include { imeta_samples_csv} from '../modules/imeta_samples_csv.nf'
-include { gsheet_to_csv} from '../modules/gsheet_to_csv.nf'
+include { imeta_study } from './modules/imeta_study.nf'
+include { imeta_samples_csv} from './modules/imeta_samples_csv.nf'
+include { gsheet_to_csv} from './modules/gsheet_to_csv.nf'
 
 // include workflow common to all input modes:
-include { run_from_irods_tsv } from './run_from_irods_tsv.nf'
+include { run_from_irods_tsv } from './pipelines/run_from_irods_tsv.nf'
 
 workflow {
 
